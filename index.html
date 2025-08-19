@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airdrop Sharing</title>
+  <!-- Technical Font -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+      background: white;
+      color: #000;
+    }
+    header {
+      background: #fff;
+      border-bottom: 4px solid #000;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 0;
+    }
+    .join-btn {
+      background: #f87171;
+      border: 2px solid #000;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .join-btn:hover {
+      background: #38bdf8;
+    }
+    main {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border: 3px solid #000;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .card p {
+      font-size: 14px;
+      margin: 0 0 15px;
+    }
+    .claim-btn {
+      display: inline-block;
+      background: #f87171;
+      border: 2px solid #000;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .claim-btn:hover {
+      background: #38bdf8;
+    }
+    footer {
+      background: #fff;
+      border-top: 4px solid #000;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      
+    }
+    .crypto-slider {
+  background: #FF001B;
+  color: #000;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 2.5px solid black;
+}
+
+.slider-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 10s linear infinite;
+}
+
+.slide {
+  padding: 0 50px;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+  .image-slider {
+    width: 340px;
+    height: 200px;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid black;
+    border-radius: 15px;
+  }
+
+  .image-slider img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    border-radius: 15px;
+  }
+
+  .image-slider img.active {
+    opacity: 1;
+  }
+  </style>
+</head>
+<body>
+  <div class="crypto-slider">
+    <div class="slider-track">
+      <div class="slide">NEW AIRDROP ARRIVED !!!</div>
+      <div class="slide">NEW AIRDROP ARRIVED !!!</div>
+      <div class="slide">NEW AIRDROP ARRIVED !!!</div>
+      <div class="slide">NEW AIRDROP ARRIVED !!!</div>
+    </div>
+  </div>
+  <header>
+    
+    <h1>AIR SHARE.1</h1>
+<button class="join-btn" onclick="window.location.href='https://t.me/air_share1'">TELEGRAM</button>
+    <button class="join-btn" onclick="window.location.href='news.html'">NEWS</button>
+  </header>
+  <div class="image-slider">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9n3WiNHxDTbEUW3iU0wtMMzODFiKlHhisQZXRtxITmysZgibLo8k9N_k&s=10" class="active">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ1CEpvHnsS39_7Iim4OKqThDHmlnWxnCHzg&usqp=CAU">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJXC8QQ9bsQuVY6a9Wfn2njKyNVgXXStPQ4j-5clNsB9BFGKAVGyln3J35&s=10">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcl5CKoeKo1K1POMSIXDwNlXvxJRI9HdvlQ8qXv1lfYKATg7pvi5Xq4vk&s=10">
+  </div>
+  <main id="airdrop-list">
+    <!-- Cards will be added by JavaScript -->
+</main>
+  <footer>
+    © 2025 AIR SHARE.1 All Rights Reserved by 信頼.
+  </footer>
+
+  <script>
+    let index = 0;
+    const images = document.querySelectorAll(".image-slider img");
+
+    setInterval(() => {
+      images[index].classList.remove("active");
+      index = (index + 1) % images.length;
+      images[index].classList.add("active");
+    }, 5000); // 5 seconds
+    
+    const airdrops = [
+            { id: 001, title: "BLESS Network", desc: "Compact: PC|ANDROID", link: "https://bless.network/dashboard?ref=Q41CTX" },
+      { id: 1, title: "GRASS Network", desc: "Compact: PC|ANDROID APP", link: "https://app.grass.io/register?referral=PQCdN3QSxTkJTtC" },
+      { id: 2, title: "DAWN Network", desc: "Compact: PC|ANDROID", link: "https://dashboard.dawninternet.com/" },
+      { id: 3, title: "OneFootball Club", desc: "Compact: All devices|(S2)", link:"https://ofc.onefootball.com/s2?referral=z7QOFr5bCXRK"},
+    ];
+
+    const container = document.getElementById("airdrop-list");
+
+    airdrops.forEach(drop => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h2>${drop.title}</h2>
+        <p>${drop.desc}</p>
+        <a href="${drop.link}" class="claim-btn">JOIN</a>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
