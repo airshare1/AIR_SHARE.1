@@ -1,19 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "809cefb6-761b-460d-8159-10b388de069a",
-    });
-  });
-</script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" href="airshare1.png">
-  <title>AIR SHARE.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIRSHARE.1</title>
   <!-- Technical Font -->
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -23,6 +13,92 @@
       background: white;
       color: #000;
     }
+      .card-container{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:20px;
+    max-width:1000px;
+    width:100%;
+  }
+
+  .suggest-card{
+    background:#fff;
+    border:2px solid #000;
+    border-radius:16px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .suggest-card:hover{
+    transform: translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+  }
+
+  .logo{
+    width:70px; height:70px;
+    border-radius:50%;
+    background:#fff center/cover no-repeat;
+    border:2px solid #000;
+    flex-shrink:0;
+  }
+
+  .content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex:1;
+    gap:10px;
+  }
+
+  .text{ flex:1; }
+
+  h2{
+    margin:0 0 4px;
+    font-size:16px; color:#000;
+  }
+  .subtitle{
+    margin:0;
+    color:#666; font-size:13px;
+  }
+
+  .cta{
+    padding:6px 14px;
+    background:#f87171;
+    border:1.5px solid #000;
+    border-radius:8px;
+    font-size:40px;
+    font-weight:600;
+    cursor:pointer;
+    color:white;
+    white-space:nowrap;
+    transition: background .25s, color .25s, transform .1s;
+  }
+  .cta:hover{
+    background:#38bdf8;
+    color:#fff;
+    transform: translateY(-2px);
+  }
+  .cta:active{ transform:translateY(0); }
+
+  /* Responsive Breakpoints */
+  @media (max-width:900px){
+    .card-container{
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width:600px){
+    .card-container{
+      grid-template-columns: 1fr;
+    }
+    .logo{ width:60px; height:60px; }
+    h2{ font-size:15px; }
+    .subtitle{ font-size:12px; }
+    .cta{ padding:5px 12px; font-size:16px; }
+  }
     header {
       background: #fff;
       border-bottom: 4px solid #000;
@@ -114,7 +190,7 @@
 .slider-track {
   display: flex;
   width: max-content;
-  animation: scroll 17s linear infinite;
+  animation: scroll 10s linear infinite;
 }
 
 .slide {
@@ -143,34 +219,181 @@
     transition: opacity 1s ease-in-out;
     border-radius: 15px;
   }
+.claim-bt.n {
+    position: fixed;
+    top: 20px;
+    left: 0px;
+    background: #ff0000;
+    color: white;
+    border: 1.5px solid black;
+    padding: 12px 18px;
+    width: 120px; /* fixed width to prevent resizing */
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s, transform 0.2s, border 0.2s;
+  }
 
+  .claim-btn.:hover {
+    background: #0000ff;
+    color: white;
+    transform: scale(1.05);
+    border: 2px solid black;
+  }
+
+  /* Floating menu container */
+  .floating-menu {
+    position: fixed;
+    top: 100px;
+    left: 17px;
+    width: 90%;
+    text-align: center;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1.5px solid black;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    z-index: 100;
+  }
+
+  .floating-menu.show {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+
+  /* Menu items */
+  .floating-menu a {
+    display: block;
+    padding: 12px 20px;
+    color: black;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .floating-menu a:last-child {
+    border-bottom: none;
+  }
+
+  .floating-menu a:hover {
+    background: #eee;
+    color: #333;
+  }
   .image-slider img.active {
     opacity: 1;
   }
+  .notice-board {
+    width: 80%;
+    left: 13px;
+    top: 10px;
+    min-height: 60px;
+    background: white;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow:;
+    text-align: center;
+    font-size: 18px;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .notice {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .notice.show {
+    opacity: 1;
+  }
+  header img {
+    height: 50px;
+    width: 40px;
+    margin-right: 1px;
   </style>
 </head>
 <body>
   <div class="crypto-slider">
     <div class="slider-track">
-      <div class="slide">•CELIA CHECKLIST SOON...</div>
-      <div class="slide">•$TAO AIRDROP FOR LIMITED TIME...</div>
-      <div class="slide">•GRASS EPOCH 10 IS END ON 27-AUG-2025</div>
-      <div class="slide">•AIR SHARE.1 IS LAUNCH THERE OWN TELEGRAM MINI APP SOON...</div>
+      <div class="slide">NEW AIRDROP ARRIVED !!!</div>
+      <div class="slide">NEW AIRDROP ARRIVED !!!</div>
+      <div class="slide">NEW AIRDROP ARRIVED !!!</div>
+      <div class="slide">NEW AIRDROP ARRIVED !!!</div>
     </div>
   </div>
   <header>
-    
+    <img src="logo.png" alt="">
     <h1>AIR SHARE.1</h1>
-<button class="join-btn" onclick="window.location.href='https://shorturl.at/8hG9y'">TELEGRAM</button>
-    <button class="join-btn" onclick="window.location.href='news.html'">NEWS</button>
+<button class="claim-btn" id="navBtn" onclick="toggleMenu()">☰ Menu</button>
+
+<div class="floating-menu" id="menu">
+  <a href="staking.html">STAKING</a>
+  <a href="news.html">NEWS</a>
+  <a href="https://t.me/air_share1">TELEGRAM</a>
+  <a href="giveaway.html">GIVEAWAY</a>
+    <a href="help.html">HELP</a>
+</div>
   </header>
-  <div class="image-slider">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9n3WiNHxDTbEUW3iU0wtMMzODFiKlHhisQZXRtxITmysZgibLo8k9N_k&s=10" class="active">
-    <img src="'https://postimages.org/' target='_blank'><img src='https://i.postimg.cc/rwz4Bj2m/20250819-220429.jpg' border='0' alt='20250819-220429'/">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJXC8QQ9bsQuVY6a9Wfn2njKyNVgXXStPQ4j-5clNsB9BFGKAVGyln3J35&s=10">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcl5CKoeKo1K1POMSIXDwNlXvxJRI9HdvlQ8qXv1lfYKATg7pvi5Xq4vk&s=10">
-  </div>
-  <main id="airdrop-list">
+<div class="notice-board" id="noticeBoard">
+  <div class="notice show" id="notice">Welcome! to AIR SHARE.1</div>
+</div>
+  <main id="airdrop-list.">
+    <div class="card-container">
+  <!-- Card 1 -->
+  <article class="suggest-card">
+    <div class="logo" style="background-image:url('grass.jpg');"></div>
+    <div class="content">
+      <div class="text">
+        <h2>GRASS (stage-2)</h2>
+        <p class="subtitle">PC|ANDROID</p>
+      </div>
+      <button class="cta" onclick="window.location.href='https://app.grass.io/register?referral=PQCdN3QSxTkJTtC'">JOIN</button>
+    </div>
+  </article>
+
+  <!-- Card 2 -->
+  <article class="suggest-card">
+    <div class="logo" style="background-image:url('dawn.jpg');"></div>
+    <div class="content">
+      <div class="text">
+        <h2>DAWN</h2>
+        <p class="subtitle">PC|ANDROID</p>
+      </div>
+      <button class="cta" onclick="copyAndGo('wi6jmr09', 'https://dashboard.dawninternet.com/')">
+  JOIN
+</button>
+    </div>
+  </article>
+  <article class="suggest-card">
+    <div class="logo" style="background-image:url('bless.jpg');"></div>
+    <div class="content">
+      <div class="text">
+        <h2>BLESS</h2>
+        <p class="subtitle">PC|ANDROID</p>
+      </div>
+      <button class="cta" onclick="window.location.href='https://bless.network/dashboard?ref=Q41CTX'">JOIN</button>
+    </div>
+  </article>
+  <!-- Card 3 -->
+  <article class="suggest-card">
+    <div class="logo" style="background-image:url('xos.jpg');"></div>
+    <div class="content">
+      <div class="text">
+        <h2>XOS season-2</h2>
+        <p class="subtitle">PC|ANDROID (APP)</p>
+      </div>
+      <button class="cta" onclick="window.location.href='https://sosovalue.com/join/3LX6H9IC'">JOIN</button>
+    </div>
+  </article>
     <!-- Cards will be added by JavaScript -->
 </main>
   <footer>
@@ -178,6 +401,32 @@
   </footer>
 
   <script>
+    const notices = [
+    "Welcome! This is the first notice.",
+    "Don't forget to check our latest updates.",
+    "New features coming soon! Stay tuned.",
+    "Contact support if you need any help.",
+    "Have a great day! Enjoy our services."
+  ];
+
+  let currentIndex = 0;
+  const noticeDiv = document.getElementById('notice');
+
+  function changeNotice() {
+    // Fade out
+    noticeDiv.classList.remove('show');
+
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % notices.length;
+      noticeDiv.textContent = notices[currentIndex];
+      // Fade in
+      noticeDiv.classList.add('show');
+    }, 1000); // Match fade-out duration
+  }
+
+  // Change notice every 15 seconds
+  setInterval(changeNotice, 5000);
+  
     let index = 0;
     const images = document.querySelectorAll(".image-slider img");
 
@@ -188,9 +437,6 @@
     }, 5000); // 5 seconds
     
     const airdrops = [
-{ id: 004, title: "BLIND", desc: "Compact: PC|ANDROID (WEB)", link: "https://goblind.xyz/profile" },
-{ id: 003, title: "Pi2 Squad", desc: "Compact: PC|ANDROID (WEB)", link: "https://portal.pi2.network/reactor" },
-{ id: 002, title: "$TAO x INSPECT", desc: "Compact: PC|ANDROID (WEB)", link: "https://inspect.xyz/substrike/" },
             { id: 001, title: "BLESS Network", desc: "Compact: PC|ANDROID", link: "https://bless.network/dashboard?ref=Q41CTX" },
       { id: 1, title: "GRASS Network", desc: "Compact: PC|ANDROID APP", link: "https://app.grass.io/register?referral=PQCdN3QSxTkJTtC" },
       { id: 2, title: "DAWN Network", desc: "Compact: PC|ANDROID", link: "https://dashboard.dawninternet.com/" },
@@ -205,10 +451,37 @@
       card.innerHTML = `
         <h2>${drop.title}</h2>
         <p>${drop.desc}</p>
-        <a href="${drop.link}" class="claim-btn">JOIN</a>
+        <a href="${drop.link}" class="claim-btn.">JOIN</a>
       `;
       container.appendChild(card);
     });
+    function toggleMenu() {
+  const menu = document.getElementById('menu');
+  const button = document.getElementById('navBtn');
+  menu.classList.toggle('show');
+
+  // Change button text without affecting size
+  button.textContent = menu.classList.contains('show') ? '× CLOSE' : '☰ MENU';
+}
+
+// Close menu if clicked outside
+window.addEventListener('click', function(e) {
+  const menu = document.getElementById('menu');
+  const button = document.getElementById('navBtn');
+  if (!menu.contains(e.target) && !button.contains(e.target)) {
+    menu.classList.remove('show');
+    button.textContent = '☰ Menu';
+  }
+});
+function copyAndGo(code, link) {
+    navigator.clipboard.writeText(code).then(() => {
+      alert("Code copied: " + code);
+      window.location.href = link;
+    }).catch(err => {
+      console.error("Failed to copy: ", err);
+      window.location.href = link;
+    });
+  }
   </script>
 
 </body>
