@@ -315,18 +315,31 @@
   .notice.show {
     opacity: 1;
   }
-#searchInput::placeholder {
-  color: #666;
-  font-style: italic;
-}
-
-#searchInput:hover,
-#searchInput:focus {
-  background: #add8e6;
-  border-color: black;
-  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
-  transform: scale(1.02);
-}
+ .search-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    #searchInput {
+      padding: 12px 16px;
+      width: 85%;
+      max-width: 350px;
+      border: 2px solid #000;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+    #searchInput::placeholder {
+      color: #666;
+      font-style: italic;
+    }
+    #searchInput:hover,
+    #searchInput:focus {
+      background: #38bdf8;
+      color: #fff;
+      border-color: #000;
+      outline: none;
+    }
   header img {
     height: 50px;
     width: 40px;
@@ -359,9 +372,9 @@
   <div class="notice show" id="notice">Welcome! to AIR SHARE.1</div>
 </div>
 <centre>
-<div>
- <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by token name">
-</div>
+<div class="search-container">
+    <input type="text" id="searchInput" onkeyup="searchCards()" placeholder="Search by token name">
+  </div>
 </centre>
 <div id="tokenTable">
   <main id="airdrop-list.">
@@ -511,18 +524,14 @@ function copyAndGo(code, link) {
       window.location.href = link;
     });
   }
-function searchTable() {
+function searchCards() {
       let input = document.getElementById("searchInput").value.toUpperCase();
-      let table = document.getElementById("tokenTable");
-      let tr = table.getElementsByTagName("tr");
+      let cards = document.querySelectorAll(".suggest-card");
 
-      for (let i = 1; i < tr.length; i++) {
-        let td = tr[i].getElementsByTagName("td")[1]; // Token Name column
-        if (td) {
-          let txtValue = td.textContent || td.innerText;
-          tr[i].style.display = txtValue.toUpperCase().indexOf(input) > -1 ? "" : "none";
-        }
-      }
+      cards.forEach(card => {
+        let title = card.querySelector("h2").textContent.toUpperCase();
+        card.style.display = title.indexOf(input) > -1 ? "" : "none";
+      });
     }
   </script>
 
