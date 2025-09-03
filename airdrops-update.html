@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Styled Token Table</title>
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: 'JetBrains Mono', monospace;
+        background-color: #fff;
+        color: #000;
+        font-weight: bold;
+    }
+
+    .table-container {
+        width: 100%;
+        max-height: 350px;
+        overflow-y: auto;
+        border: 2px solid #000;
+        border-radius: 12px;
+        background: #fff;
+    }
+      .back-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #f87171; /* light red */
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 2px solid #000; /* black border */
+    border-radius: 8px; /* rounded corners */
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .back-btn:hover {
+    background-color: #add8e6; /* light blue */
+    border-radius: 50px; /* more rounded on hover */
+  }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px 10px;
+        text-align: center;
+        transition: background 0.3s ease; /* Smooth hover effect */
+    }
+
+    th {
+        background-color: #ff4d4d;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    td {
+        border-bottom: 1px solid #000;
+        font-size: 14px;
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Hover effect for entire row */
+    tr:hover td {
+        background-color: #ffeaea; /* Light red background */
+    }
+
+    /* Image styling - full circle */
+    td img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%; /* Full circle */
+        object-fit: cover;
+        border: 1px solid #000;
+    }
+
+    /* JOIN button styling */
+    .join-btn {
+        background-color: #ff6b6b;
+        color: #fff;
+        padding: 6px 14px;
+        font-weight: bold;
+        font-size: 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+    .join-btn:hover {
+        background-color: #ff4d4d;
+    }
+   #searchInput {
+  width: 100%;
+  max-width: 280px;
+  padding: 10px 14px;
+  border: 2px solid #ff5c5c;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 15px;
+  background: #fff5f5;
+  color: #000;
+  outline: none;
+  transition: all 0.25s ease-in-out;
+}
+
+#searchInput::placeholder {
+  color: #666;
+  font-style: italic;
+}
+
+#searchInput:hover,
+#searchInput:focus {
+  background: #add8e6;
+  border-color: black;
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+</style>
+</head>
+<body>
+<div>
+  <a href="index.html" class="back-btn">Back</a>
+</div>
+<br>
+<center>
+ <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by token name">
+ </center>
+<br>
+
+<div class="table-container">
+  <table id="tokenTable">
+    <tr>
+      <th>ICON</th>
+      <th>TOKEN NAME</th>
+      <th>FUNDING</th>
+      <th>CHECKER</th>
+      <th>TGE</th>
+      <th>SPECIAL</th>
+    </tr>
+    <tr>
+      <td><img src="grass.jpg" alt="img1"></td>
+      <td>GRASS (stage 2)</td>
+      <td>$500K</td>
+      <td>☒</td>
+      <td>☑</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td><img src="dawn.jpg" alt="img2"></td>
+      <td>DAWN</td>
+      <td>$200K</td>
+      <td>☒</td>
+      <td>☒</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td><img src="bless.jpg" alt="img3"></td>
+      <td>BLESS</td>
+      <td>$350K</td>
+      <td>☒</td>
+      <td>☒</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td><img src="xos.jpg" alt="img4"></td>
+      <td>XOS</td>
+      <td>$1M</td>
+      <td>☑</td>
+      <td>☑</td>
+      <td>NOTHING</td>
+    </tr>
+  </table>
+</div>
+<center>
+<p>←SCROLL LEFT</p>
+</center>
+<script>
+  function searchTable() {
+      let input = document.getElementById("searchInput").value.toUpperCase();
+      let table = document.getElementById("tokenTable");
+      let tr = table.getElementsByTagName("tr");
+
+      for (let i = 1; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[1]; // Token Name column
+        if (td) {
+          let txtValue = td.textContent || td.innerText;
+          tr[i].style.display = txtValue.toUpperCase().indexOf(input) > -1 ? "" : "none";
+        }
+      }
+    }
+</script>
+</body>
+</html>
