@@ -315,6 +315,18 @@
   .notice.show {
     opacity: 1;
   }
+#searchInput::placeholder {
+  color: #666;
+  font-style: italic;
+}
+
+#searchInput:hover,
+#searchInput:focus {
+  background: #add8e6;
+  border-color: black;
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
+  transform: scale(1.02);
+}
   header img {
     height: 50px;
     width: 40px;
@@ -346,6 +358,12 @@
 <div class="notice-board" id="noticeBoard">
   <div class="notice show" id="notice">Welcome! to AIR SHARE.1</div>
 </div>
+<centre>
+<div>
+ <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by token name">
+</div>
+</centre>
+<div id="tokenTable">
   <main id="airdrop-list.">
     <div class="card-container">
 <article class="suggest-card">
@@ -406,6 +424,7 @@
   </article>
     <!-- Cards will be added by JavaScript -->
 </main>
+</div>
   <footer>
     © 2025 AIR SHARE.1 All Rights Reserved by TRMX & RLMe
   </footer>
@@ -492,6 +511,19 @@ function copyAndGo(code, link) {
       window.location.href = link;
     });
   }
+function searchTable() {
+      let input = document.getElementById("searchInput").value.toUpperCase();
+      let table = document.getElementById("tokenTable");
+      let tr = table.getElementsByTagName("tr");
+
+      for (let i = 1; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[1]; // Token Name column
+        if (td) {
+          let txtValue = td.textContent || td.innerText;
+          tr[i].style.display = txtValue.toUpperCase().indexOf(input) > -1 ? "" : "none";
+        }
+      }
+    }
   </script>
 
 </body>
