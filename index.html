@@ -99,7 +99,7 @@
 
     .features li {
       margin: 8px 0;
-      padding: 8px 12px 8px 40px; /* extra padding for tick */
+      padding: 8px 12px 8px 40px; /* space for tick image */
       border: 2px solid black;
       border-radius: 10px;
       background: #fafafa;
@@ -108,7 +108,7 @@
       transition: transform 0.3s, background 0.3s;
     }
 
-    /* ✅ Replace ✓ with tick.png image */
+    /* Tick image instead of ✓ */
     .features li::before {
       content: "";
       position: absolute;
@@ -165,13 +165,19 @@
       </ul>
     </div>
   </div>
+
   <script>
-    // Set target date (example: 7 days from now)
-    const targetDate = new Date().getTime() + (01 * 03 * 00 * 60 * 1000);
+    // Calculate a fixed target date: 1 day 2 hours 23 minutes from NOW
+    const now = new Date();
+    const targetDate = new Date(now.getTime() + (
+      (1 * 24 * 60 * 60 * 1000) +  // 1 day
+      (2 * 60 * 60 * 1000) +       // 2 hours
+      (23 * 60 * 1000)             // 23 minutes
+    )).getTime();
 
     function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+      const current = new Date().getTime();
+      const distance = targetDate - current;
 
       if (distance < 0) {
         document.getElementById("countdown").innerHTML = "🚀 We're Live Now!";
@@ -183,10 +189,10 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById("days").innerText = days;
-      document.getElementById("hours").innerText = hours;
-      document.getElementById("minutes").innerText = minutes;
-      document.getElementById("seconds").innerText = seconds;
+      document.getElementById("days").innerText = days.toString().padStart(2, "0");
+      document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
+      document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
+      document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
     }
 
     setInterval(updateCountdown, 1000);
