@@ -167,13 +167,9 @@
   </div>
 
   <script>
-    // Calculate a fixed target date: 1 day 2 hours 23 minutes from NOW
-    const now = new Date();
-    const targetDate = new Date(now.getTime() + (
-      (1 * 24 * 60 * 60 * 1000) +  // 1 day
-      (2 * 60 * 60 * 1000) +       // 2 hours
-      (23 * 60 * 1000)             // 23 minutes
-    )).getTime();
+    // 🎯 Set a fixed target date & time
+    // Example: September 7, 2025 at 12:00:00
+    const targetDate = new Date("September 7, 2025 12:00:00").getTime();
 
     function updateCountdown() {
       const current = new Date().getTime();
