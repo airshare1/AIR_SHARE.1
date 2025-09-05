@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maintenance | AIR SHARE.1</title>
+  <style>
+    body {
+      font-family: monospace, sans-serif;
+      background: linear-gradient(135deg, #ffffff, #f7f7f7);
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .box {
+      border: 2px solid black;
+      border-radius: 16px;
+      padding: 20px;
+      width: 90%;
+      max-width: 340px;
+      background: #fff;
+      box-shadow: 4px 4px 0px black;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .box:hover {
+      transform: scale(1.02);
+      box-shadow: 6px 6px 0px #ff4c4c;
+    }
+
+    .box h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .box p {
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .time {
+      border: 2px solid black;
+      border-radius: 10px;
+      padding: 10px;
+      min-width: 55px;
+      background: #fafafa;
+      box-shadow: 2px 2px 0px black;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .time:hover {
+      transform: translateY(-5px);
+      background: #ffecec;
+    }
+
+    .time span {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .time small {
+      font-size: 0.7rem;
+    }
+
+    /* --- Features section --- */
+    .features {
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    .features h3 {
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 10px;
+      border-bottom: 2px solid black;
+      display: inline-block;
+      padding: 3px 10px;
+    }
+
+    .features ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .features li {
+      margin: 8px 0;
+      padding: 8px 12px 8px 40px; /* extra padding for tick */
+      border: 2px solid black;
+      border-radius: 10px;
+      background: #fafafa;
+      box-shadow: 2px 2px 0px black;
+      position: relative;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    /* ✅ Replace ✓ with tick.png image */
+    .features li::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      background: url('tick.png') no-repeat center center;
+      background-size: contain;
+    }
+
+    .features li:hover {
+      transform: translateX(5px);
+      background: #eafff2;
+    }
+
+    @media (max-width: 400px) {
+      .box {
+        padding: 15px;
+        max-width: 280px;
+      }
+      .time {
+        min-width: 48px;
+        padding: 8px;
+      }
+      .time span {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>🚧 Under Maintenance 🚧</h2>
+    <p>We’re upgrading AIR SHARE.1 to serve you better.<br>We’ll be back soon!</p>
+
+    <div class="countdown" id="countdown">
+      <div class="time"><span id="days">00</span><small>Days</small></div>
+      <div class="time"><span id="hours">00</span><small>Hours</small></div>
+      <div class="time"><span id="minutes">00</span><small>Minutes</small></div>
+      <div class="time"><span id="seconds">00</span><small>Seconds</small></div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features">
+      <h3>✨ UPDATE FEATURES ✨</h3>
+      <ul>
+        <li>New Airdrop Listings</li>
+        <li>Faster Verification</li>
+        <li>Video for easy to join</li>
+        <li>Mobile Friendly Design</li>
+        <li>Glitches and bug fix</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Set target date (example: 7 days from now)
+    const targetDate = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "🚀 We're Live Now!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
