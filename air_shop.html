@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIR SHOP - Book Store</title>
+  <style>
+    body {
+      font-family: monospace, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #F4D3A7;
+      color: #000;
+    }
+
+    /* 🔴 Top Banner */
+    .top-banner {
+      background: #E48610;
+      color: #fff;
+      text-align: center;
+      padding: 8px;
+      font-weight: bold;
+    }
+
+    /* 🔹 Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border-bottom: 2px solid #000;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;  /* 🔵 makes logo round */
+      object-fit: cover;    /* keeps it inside /* optional border */
+    }
+    .logo h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    /* ❌ Close Button */
+    .close-btn {
+      background: #C5EBE1;
+      border: 2px solid #000;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      color: #000;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s;
+    }
+    .close-btn:hover {
+      background: #1F709D; /* Light blue */
+      color: #fff;
+    }
+
+    /* 🔹 Welcome Box */
+    .welcome {
+      margin: 15px;
+      padding: 15px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* 🔹 Book Cards */
+    .book-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid #000;
+      border-radius: 12px;
+      margin: 15px;
+      padding: 10px;
+      background: #DEC9AC;
+      transition: 0.3s ease-in-out;
+    }
+    .book-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 15px rgba(0, 191, 255, 0.5); /* Light blue glow */
+    }
+
+    .book-info {
+      display: flex;
+      align-items: center;
+    }
+    .book-info img {
+      width: 60px;
+      height: 80px;
+      border-radius: 8px;
+      border: 1px solid black;
+      margin-right: 12px;
+    }
+    .book-text h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+    .book-text p {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #555;
+    }
+
+    /* 🔹 Button */
+    .btn {
+      background: #ff6b6b;
+      border: 2px solid #000;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #00bfff; /* Light blue */
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 191, 255, 0.6);
+    }
+
+    /* 🚫 Remove click effect */
+    a, .btn, .close-btn {
+      outline: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    a:active, .btn:active, .close-btn:active {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔴 Banner -->
+  <div class="top-banner">DOWNLOAD TRADING BOOKS FOR FREE</div>
+
+  <!-- 🔹 Header -->
+  <header>
+    <div class="logo">
+      <img src="airshop.jpg" alt="AIR SHOP Logo">
+      <h1>AIR SHOP</h1>
+    </div>
+    <a href="javascript:history.back()" class="close-btn">✖</a>
+  </header>
+
+  <!-- 🔹 Welcome Box -->
+  <div class="welcome">
+    Welcome! to AIR SHOP
+    <br>Get your books instantly in PDF format
+  </div>
+
+  <!-- 🔹 Book List -->
+  <div class="book-card">
+    <div class="book-info">
+      <img src="airbook1.jpg" alt="Book 1">
+      <div class="book-text">
+        <h3>Crypto Basics</h3>
+        <p>PDF | Beginner Guide</p>
+      </div>
+    </div>
+    <a href="books/trading bible by airshop.pdf" download="trading bible by airshop.pdf" class="btn" download>FREE</a>
+  </div>
+
+  <div class="book-card">
+    <div class="book-info">
+      <img src="images/book2-cover.jpg" alt="Book 2">
+      <div class="book-text">
+        <h3>Money Mastery</h3>
+        <p>PDF | Finance Tips</p>
+      </div>
+    </div>
+    <a href="books/book2.pdf" class="btn" download>FREE</a>
+  </div>
+
+  <div class="book-card">
+    <div class="book-info">
+      <img src="images/book3-cover.jpg" alt="Book 3">
+      <div class="book-text">
+        <h3>Trading Secrets</h3>
+        <p>PDF | Pro Level</p>
+      </div>
+    </div>
+    <a href="books/book3.pdf" class="btn" download>FREE</a>
+  </div>
+
+</body>
+</html>
