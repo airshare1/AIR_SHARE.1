@@ -277,6 +277,15 @@
     <main id="airdrop-list">
       <div class="card-container" id="cardsGrid">
         <!-- Cards (you had some hard-coded; these keep same visuals and now call showDetail) -->
+                <article class="suggest-card">
+          <div class="logo" style="background-image:url('openmind.png');"></div>
+          <div class="content">
+            <div class="text">
+              <h2>OPENMIND</h2>
+              <p class="subtitle">PC | ANDROID (APP)</p>
+            </div>
+            <button class="cta" onclick="showDetail('OPENMIND','openmind.png','https://fabric.openmind.org?invite_code=509682B1','openmind')">JOIN</button>
+          </div>
 
         <article class="suggest-card">
           <div class="logo" style="background-image:url('sosovalue.jpeg');"></div>
@@ -362,6 +371,20 @@
   <script>
     // ========== Data for each airdrop (customize steps/content per airdrop) ==========
     const AIRDROPS = {
+  'openmind': {
+        title: 'OPENMIND',
+        image: 'openmind.png',
+        link: 'https://fabric.openmind.org?invite_code=509682B1',
+        subtitle:'PC | ANDROID',
+        steps:[
+          'Visit official OpenMind join link.',
+          'Register with email & verify.',
+          'Connect X & Discord account.',
+          'Download app and Register with same email and give location permission.',
+          'Just explore by going to the blue dot and earn points.',
+        ],
+        chart: { labels:['Mon','Tue','Wed','Thu','Fri'], values:[3,6,8,5,9] }
+      },
       'sosovalue': {
         title: 'SoSoVALUE (S2)',
         image: 'sosovalue.jpeg',
