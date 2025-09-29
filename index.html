@@ -278,6 +278,16 @@
       <div class="card-container" id="cardsGrid">
         <!-- Cards (you had some hard-coded; these keep same visuals and now call showDetail) -->
                 <article class="suggest-card">
+          <div class="logo" style="background-image:url('jigsaw.jpg');"></div>
+          <div class="content">
+            <div class="text">
+              <h2>JIGSAW</h2>
+              <p class="subtitle">PC | ANDROID</p>
+            </div>
+            <button class="cta" onclick="showDetail('JIGSAW','jigsaw.jpg','https://jigsaw.build?ref=rajshaswp5mp','jigsaw')">JOIN</button>
+          </div>
+</article>
+                <article class="suggest-card">
           <div class="logo" style="background-image:url('openmind.png');"></div>
           <div class="content">
             <div class="text">
@@ -371,6 +381,20 @@
   <script>
     // ========== Data for each airdrop (customize steps/content per airdrop) ==========
     const AIRDROPS = {
+'openmind': {
+        title: 'JIGSAW',
+        image: 'jigsaw.jpg',
+        link: 'https://jigsaw.build?ref=rajshaswp5mp',
+        subtitle:'PC | ANDROID',
+        steps:[
+          'Visit official Jigsaw join waitlist link.',
+          'Register with email & verify.',
+          'Connect X account.',
+          'Reffer and increase mining speed.',
+          'wait for future updates.',
+        ],
+        chart: { labels:['Mon','Tue','Wed','Thu','Fri'], values:[0,0,0,0,0] }
+      },
   'openmind': {
         title: 'OPENMIND',
         image: 'openmind.png',
