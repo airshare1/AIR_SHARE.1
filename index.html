@@ -277,6 +277,16 @@
     <main id="airdrop-list">
       <div class="card-container" id="cardsGrid">
         <!-- Cards (you had some hard-coded; these keep same visuals and now call showDetail) -->
+<article class="suggest-card">
+          <div class="logo" style="background-image:url('pikesarena.jpg');"></div>
+          <div class="content">
+            <div class="text">
+              <h2>PikesArena</h2>
+              <p class="subtitle">PC | ANDROID</p>
+            </div>
+            <button class="cta" onclick="showDetail('PIKESARENA','jigsaw.jpg','https://game.pikesarena.com/','pikesarena')">JOIN</button>
+          </div>
+</article>
                 <article class="suggest-card">
           <div class="logo" style="background-image:url('jigsaw.jpg');"></div>
           <div class="content">
@@ -381,6 +391,20 @@
   <script>
     // ========== Data for each airdrop (customize steps/content per airdrop) ==========
     const AIRDROPS = {
+'pikesarena': {
+        title: 'PikesArena',
+        image: 'pikesarena.jpg',
+        link: 'https://game.pikesarena.com/',
+        subtitle:'PC | ANDROID',
+        steps:[
+          'Visit official Jigsaw join waitlist link.',
+          'First Click "Warm up" and register.',
+          'Play Game and complete all tasks.',
+          'Daily Play & earn more tokens.',
+          'wait for future updates.',
+        ],
+        chart: { labels:['Mon','Tue','Wed','Thu','Fri'], values:[0,0,0,0,0] }
+      },
 'jigsaw': {
         title: 'JIGSAW',
         image: 'jigsaw.jpg',
