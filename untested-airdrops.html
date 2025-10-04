@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Airdrops - Powered by RAJ TEC.LTD</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #000000;
+        }
+        
+        h1 {
+            color: #000000;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #333333;
+            font-size: 1.2rem;
+        }
+        
+        .admin-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #000000;
+            text-decoration: none;
+            border: 1px solid #000000;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-link:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+        
+        .search-container {
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px 20px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            background: #ffffff;
+            color: #000000;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #000000;
+        }
+        
+        .section-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .section-btn {
+            background: #ffffff;
+            color: #000000;
+            border: 1px solid #000000;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .section-btn:hover {
+            background: #f5f5f5;
+        }
+        
+        .section-btn.active {
+            background: #000000;
+            color: #ffffff;
+        }
+        
+        .table-container {
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #000000;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        thead {
+            background: #f5f5f5;
+        }
+        
+        th {
+            padding: 18px 15px;
+            text-align: left;
+            color: #000000;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #000000;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #000000;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        td {
+            padding: 15px;
+            color: #000000;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        td:last-child {
+            border-right: none;
+        }
+        
+        .join-link {
+            display: inline-block;
+            background: #ffffff;
+            color: #000000;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid #000000;
+            transition: all 0.3s ease;
+        }
+        
+        .join-link:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+        
+        .funding {
+            font-weight: bold;
+        }
+        
+        .token-name {
+            font-weight: bold;
+        }
+        
+        .new-badge {
+            background: #000000;
+            color: #ffffff;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #000000;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            border-top: 1px solid #000000;
+        }
+        
+        .powered-by {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: #000000;
+            font-size: 1.2rem;
+            display: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #000000;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            th, td {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .section-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .search-box {
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>UN-TESTED AIRDROPS BY AIRSHARE.1</h1>
+            <p class="subtitle">∆THIS TOKENS HAVING 50% CHANCE TO LIST OR GETTING GOOD REWARD !</p>
+            
+        </header>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" id="searchInput" placeholder="Search by name, token, or backer...">
+        </div>
+        
+        <div class="section-nav">
+            <button class="section-btn active" data-section="all">All Airdrops</button>
+            <button class="section-btn" data-section="high-funding">High Funding</button>
+            <button class="section-btn" data-section="new">Recently Added</button>
+        </div>
+        
+        <div class="table-container">
+            <table id="airdropTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Funding</th>
+                        <th>Total Funding Round</th>
+                        <th>Backed By</th>
+                        <th>Token Name</th>
+                        <th>Testing No.</th>
+                        <th>Joining Link</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="7" class="loading">Loading airdrops...</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="no-results" id="noResults">
+                No airdrops found matching your search criteria.
+            </div>
+        </div>
+        
+        <footer>
+            <p>Powered by <span class="powered-by">RAJ TEC.LTD</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDy5ro1eocMgidbelSsCGRTCxjqsVj0Nug",
+            authDomain: "airshare-1.firebaseapp.com",
+            databaseURL: "https://airshare-1-default-rtdb.firebaseio.com",
+            projectId: "airshare-1",
+            storageBucket: "airshare-1.firebasestorage.app",
+            messagingSenderId: "72858737897",
+            appId: "1:72858737897:web:d693a2285d298d28266478",
+            measurementId: "G-L18BCJZFV0"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // DOM Elements
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const sectionButtons = document.querySelectorAll('.section-btn');
+        const noResults = document.getElementById('noResults');
+
+        // Load airdrops from Firebase
+        function loadAirdrops() {
+            database.ref('airdrops').on('value', (snapshot) => {
+                const airdrops = snapshot.val();
+                tableBody.innerHTML = '';
+                
+                if (airdrops) {
+                    // Convert to array and sort by timestamp (newest first)
+                    const airdropsArray = Object.keys(airdrops).map(key => {
+                        return {
+                            id: key,
+                            ...airdrops[key]
+                        };
+                    });
+                    
+                    // Sort by timestamp (newest first)
+                    airdropsArray.sort((a, b) => {
+                        const timeA = a.timestamp || 0;
+                        const timeB = b.timestamp || 0;
+                        return timeB - timeA; // Descending order (newest first)
+                    });
+                    
+                    airdropsArray.forEach(airdrop => {
+                        addAirdropToTable(airdrop, airdrop.id);
+                    });
+                } else {
+                    tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No airdrops available</td></tr>';
+                }
+            });
+        }
+
+        // Add airdrop to main table
+        function addAirdropToTable(airdrop, key) {
+            const row = document.createElement('tr');
+            row.setAttribute('data-section', airdrop.section || 'all');
+            
+            // Check if airdrop is new (added within last 7 days)
+            const isNew = airdrop.timestamp && (Date.now() - airdrop.timestamp) < (7 * 24 * 60 * 60 * 1000);
+            
+            row.innerHTML = `
+                <td>
+                    ${airdrop.name}
+                    ${isNew ? '<span class="new-badge">NEW</span>' : ''}
+                </td>
+                <td class="funding">${airdrop.funding}</td>
+                <td>${airdrop.fundingRound}</td>
+                <td>${airdrop.backedBy}</td>
+                <td class="token-name">${airdrop.tokenName}</td>
+                <td>${airdrop.testingNo}</td>
+                <td><a href="${airdrop.joiningLink}" class="join-link" target="_blank">Join Airdrop</a></td>
+            `;
+            tableBody.appendChild(row);
+        }
+
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = tableBody.getElementsByTagName('tr');
+            let visibleRows = 0;
+            
+            for (let row of rows) {
+                const rowText = row.textContent.toLowerCase();
+                if (rowText.includes(searchTerm)) {
+                    row.style.display = '';
+                    visibleRows++;
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+            
+            noResults.style.display = visibleRows === 0 ? 'block' : 'none';
+        });
+
+        // Section filtering
+        sectionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const section = this.getAttribute('data-section');
+                
+                sectionButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const rows = tableBody.getElementsByTagName('tr');
+                let visibleRows = 0;
+                
+                for (let row of rows) {
+                    if (section === 'all' || row.getAttribute('data-section') === section) {
+                        row.style.display = '';
+                        visibleRows++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+                
+                noResults.style.display = visibleRows === 0 ? 'block' : 'none';
+            });
+        });
+
+        // Initialize the app
+        loadAirdrops();
+    </script>
+</body>
+</html>
